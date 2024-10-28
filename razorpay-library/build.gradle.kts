@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -76,4 +77,23 @@ dependencies {
     api("com.razorpay:checkout:1.6.40")
     implementation("com.github.solutionsaint:auth-module:1.2.6")
     implementation("com.github.solutionsaint:common-library:1.0.2")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("prodRelease") {
+                from(components["prodRelease"])
+                groupId = "com.github.solutionsaint"
+                artifactId = "razorpay-library-prod"
+                version = "1.0.0"
+            }
+            create<MavenPublication>("devRelease") {
+                from(components["devRelease"])
+                groupId = "com.github.solutionsaint"
+                artifactId = "razorpay-library-dev"
+                version = "1.0.0"
+            }
+        }
+    }
 }
