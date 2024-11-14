@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techlambda.common.ui.CommonButton
 import com.techlambda.common.ui.InputField
+import com.techlambda.common.utils.showToast
 import com.techlambda.razorpay_library.PaymentHelper.initiatePayment
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,15 +95,42 @@ fun PaymentComposable() {
                     }
                     val context = LocalContext.current
                     CommonButton(text = "Pay") {
-                        initiatePayment(
-                            name = paidTo,
+                        val validateMessage = validateForm(
+                            paidTo = paidTo,
                             description = description,
-                            amount = amount.toDouble() * 100,
-                            context = context
+                            amount = amount
                         )
+                        if(validateMessage == "Validated") {
+                            initiatePayment(
+                                name = paidTo,
+                                description = description,
+                                amount = amount.toDouble() * 100,
+                                context = context
+                            )
+                        } else {
+                            context.showToast(validateMessage)
+                        }
                     }
                 }
             }
         }
+    }
+}
+
+fun validateForm(paidTo: String, description: String, amount: String): String {
+    return when {
+        paidTo.isEmpty() -> {
+            "Please enter name of organisation"
+        }
+
+        description.isEmpty() -> {
+            "Please enter description"
+        }
+
+        amount.isEmpty() -> {
+            "Please enter amount"
+        }
+
+        else -> "Validated"
     }
 }
