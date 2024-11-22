@@ -35,10 +35,10 @@ import com.techlambda.razorpay_library.PaymentHelper.initiatePayment
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PaymentComposable() {
-    var paidTo by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var amount by remember { mutableStateOf("") }
+fun PaymentComposable(amountParam: String = "", paidToParam: String = "", descriptionParam: String = "") {
+    var paidTo by remember { mutableStateOf(paidToParam) }
+    var description by remember { mutableStateOf(descriptionParam) }
+    var amount by remember { mutableStateOf(amountParam) }
 
     Scaffold(topBar = {
         Column {

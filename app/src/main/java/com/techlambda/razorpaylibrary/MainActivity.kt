@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     var showPaymentComposable by remember { mutableStateOf(false) }
     if(showPaymentComposable) {
-        PaymentComposable()
+        PaymentComposable(amountParam = "2000")
     }else {
         Text(
             text = "Hello $name!",

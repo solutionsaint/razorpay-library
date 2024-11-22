@@ -86,13 +86,13 @@ afterEvaluate {
                 from(components["prodRelease"])
                 groupId = "com.github.solutionsaint"
                 artifactId = "razorpay-library-prod"
-                version = "1.0.2"
+                version = "1.0.3"
             }
             create<MavenPublication>("devRelease") {
                 from(components["devRelease"])
                 groupId = "com.github.solutionsaint"
                 artifactId = "razorpay-library-dev"
-                version = "1.0.2"
+                version = "1.0.3"
             }
         }
     }
