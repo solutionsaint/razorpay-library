@@ -107,6 +107,9 @@ fun PaymentComposable(amountParam: String = "", paidToParam: String = "", descri
                                 amount = amount.toDouble() * 100,
                                 context = context
                             )
+                            paidTo = ""
+                            description = ""
+                            amount = ""
                         } else {
                             context.showToast(validateMessage)
                         }
